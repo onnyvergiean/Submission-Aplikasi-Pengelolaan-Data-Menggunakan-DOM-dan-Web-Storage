@@ -16,12 +16,24 @@ function saveData() {
   document.dispatchEvent(new Event("ondatasaved"));
 }
 
-function loadDataFromStorage() {
+function loadDataFromStorage(searchTitle = "") {
   const serializedData = localStorage.getItem(STORAGE_KEY);
 
   let data = JSON.parse(serializedData);
 
-  if (data !== null) books = data;
+  if (data !== null) {
+    if (searchTitle) {
+      books = data.filter((x) => {
+        for (let y of x.title.split(" ")) {
+          if (y === searchTitle || y.toUpperCase() === searchTitle) {
+            return y;
+          }
+        }
+      });
+    } else {
+      books = data;
+    }
+  }
 
   document.dispatchEvent(new Event("ondataloaded"));
 }

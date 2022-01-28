@@ -7,10 +7,10 @@ function makeBook(title, author, year, isCompleted) {
   bookTitle.innerText = title;
 
   const bookAuthor = document.createElement("p");
-  bookAuthor.innerText = "Penulis : " + author;
+  bookAuthor.innerText = author;
 
   const bookYear = document.createElement("p");
-  bookYear.innerText = "Tahun : " + year;
+  bookYear.innerText = year;
 
   const actionContainer = document.createElement("div");
   actionContainer.classList.add("action");
@@ -134,6 +134,8 @@ function createDeleteButton() {
 function refreshDataFromBooks() {
   let listUncompleted = document.getElementById(UNCOMPLETED_LIST_BOOK_ID);
   let listCompleted = document.getElementById(COMPLETED_LIST_BOOK_ID);
+  listUncompleted.innerHTML = "";
+  listCompleted.innerHTML = "";
   for (book of books) {
     const newBook = makeBook(
       book.title,
