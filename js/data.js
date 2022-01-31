@@ -23,16 +23,11 @@ function loadDataFromStorage(searchTitle = "") {
 
   if (data !== null) {
     if (searchTitle) {
-      books = data.filter((x) => {
-        for (let y of x.title.split(" ")) {
-          if (
-            y === searchTitle ||
-            y.toUpperCase() === searchTitle ||
-            y.toLowerCase() === searchTitle
-          ) {
-            return y;
-          }
-        }
+      books = data.filter((book) => {
+        const bookTitle = book.title.toLowerCase();
+        const searchKeyword = searchTitle.toLowerCase();
+
+        return bookTitle.includes(searchKeyword);
       });
     } else {
       books = data;
